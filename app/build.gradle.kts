@@ -46,6 +46,8 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.gridlayout)
+    implementation(libs.androidx.media3.ui)
+    implementation(libs.androidx.media3.exoplayer)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -57,5 +59,12 @@ dependencies {
     implementation(libs.converter.gson)
     // picasso
     implementation("com.squareup.picasso:picasso:2.8")
+
+    //Corotuine
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.1")
+
+        implementation("com.pierfrancescosoffritti.androidyoutubeplayer:chromecast-sender:0.28")
+        implementation("com.pierfrancescosoffritti.androidyoutubeplayer:core:12.1.0")
 
 }

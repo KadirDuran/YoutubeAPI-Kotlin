@@ -27,9 +27,11 @@ class VideoInfoAdapter(val videoList: List<SearchResult>) : RecyclerView.Adapter
 
     override fun onBindViewHolder(holder: SearchResultHolder, position: Int) {
         holder.binding.txtTittle.text = videoList[position].snippet.title
+
+        Log.i("ytapi", "Veriler : "+videoList[position].snippet.title)
         Picasso.get().load(videoList[position].snippet.thumbnails.default.url).into(holder.binding.imgVideo)
         holder.itemView.setOnClickListener {
-            val action = videolistDirections.actionVideolistToVideo(videoList[position].snippet.thumbnails.default.url,videoList[position].snippet.title)
+            val action = videolistDirections.actionVideolistToVideo(videoList[position].id.videoId,videoList[position].snippet.title)
             Navigation.findNavController(holder.itemView).navigate(action)
         }
     }
