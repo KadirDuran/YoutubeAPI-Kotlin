@@ -45,6 +45,7 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.gridlayout)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -54,5 +55,7 @@ dependencies {
     // retrofit
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
+    // picasso
+    implementation("com.squareup.picasso:picasso:2.8")
 
 }

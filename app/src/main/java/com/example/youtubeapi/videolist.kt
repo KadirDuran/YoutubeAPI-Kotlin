@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.youtubeapi.databinding.FragmentVideolistBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -18,10 +19,11 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class videolist : Fragment() {
     private  var API_KEY="AIzaSyBP24AnRFDtx5KBI8tY4tM4oI0oe94TR3s"
+    private val BASE_URL = "https://www.googleapis.com/youtube/v3/"
     private  var ItemList: ArrayList<SearchResult> = arrayListOf()
     private var _binding: FragmentVideolistBinding? = null
-
     private val binding get() = _binding!!
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -45,19 +47,16 @@ class videolist : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val adapter = VideoInfoAdapter(getDataRetrofit())  //Liste Verisi Donuyor.Adapter olusturulup devam edilecek.
+       binding.button.setOnClickListener {
+           binding.rcrow.adapter = adapter
+           binding.rcrow.layoutManager = LinearLayoutManager(requireContext())
 
-        binding.button.setOnClickListener {
-            RetrofitClient()
-           // val action =videolistDirections.actionVideolistToVideo("https://www.youtube.com/watch?v=S0Meh2scWl0","Türküler")
-            //Navigation.findNavController(it).navigate(action)
-        }
-        binding.button2.setOnClickListener {
-            Log.i("dsadasd", "onViewCreated: ${ItemList?.size.toString()}")
-        }
+       }
+
     }
 
-    private fun RetrofitClient() {
-        val BASE_URL = "https://www.googleapis.com/youtube/v3/"
+    private fun getDataRetrofit() : ArrayList<SearchResult>{
         val apiService = Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
@@ -71,24 +70,22 @@ class videolist : Fragment() {
                 if(response.isSuccessful)
                 {
                     response.body()?.let {
-
                         for(item in it.items)
                         {
-                            Log.i("items", " ${item.snippet.thumbnails.high.url}")
-                            ItemList?.add(item)
-
+                            ItemList.add(item)
+                            Log.i("Data-Write-List","Data : ${item.snippet.title}")
                         }
-                        Log.i("dsadasd", "onViewCreatedx: ${ItemList?.size.toString()}")
+
                     }
                 }
             }
 
             override fun onFailure(call: Call<SearchListResponse>, t: Throwable) {
-                Log.i("yyyyy","onfailure : ${t.message}")
+                Log.i("Retrofit-GetDataError","Error : ${t.message}")
             }
 
         })
 
-
+        return  ItemList
     }
 }

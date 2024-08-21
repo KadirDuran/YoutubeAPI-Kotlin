@@ -4,21 +4,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/black"
     tools:context=".videolist">
+
+
     <Button
         android:id="@+id/button"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Button" />
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button2" />
-    <!-- TODO: Update blank fragment layout -->
+
     <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcrow"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="VideoList" />
-
+        />
 </LinearLayout>
